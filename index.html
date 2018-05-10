@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="icon" href="favicon.ico">
+    <title>Tubo Evic Customizer</title>
+</head>
+<body>
+    <header>
+        <p>CUSTOMIZE MY</p>
+        <div>TUBO EVIC</div>
+    </header>
+
+    <canvas id="result"></canvas>
+
+    <div id="controls">
+        <div class="row">
+            <div class="column">
+                <span>WOOD</span>​
+                <form id="woodTypes" autocomplete="off">
+                    <input type="radio" name="1" onClick="updateWood(woodBeech);" checked> Beech
+                    <input type="radio" name="1" onClick="updateWood(woodPoplar);"> Poplar
+                </form>
+            </div>
+            <div class="column">
+                <span>STEM</span>​
+                <form id="stemTypes" autocomplete="off">
+                    <input type="radio" name="1" onClick="updateStem(stemShort);" checked> Short
+                    <input type="radio" name="1" onClick="updateStem(stemLongCurved);"> Long Curved
+                </form>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="displayedValues">
+            <span class="left">VAPE COLOR</span>​
+            <span class="right"><label id="vapeColorLabel"/></span>​
+        </div>
+        <div><input id="vapeColorSlider" type="range" min="1" max="9" step="1" value="1"></div>
+        <div class="displayedValues">
+            <span class="left">WOOD COLOR</span>​
+            <span class="right"><label id="woodColorLabel"/></span>​
+        </div>
+        <div><input id="woodColorSlider" type="range" min="1" max="9" step="1" value="1"></div>
+    </div>
+
+    <footer>
+        <button onClick="generateURL();">Copy URL</button>
+        <button onClick="downloadResult();">Download PNG</button>
+        <div>
+            <p>All rights belong to the creators of the Tubo Evic. © 2018</p>
+            <a target="_blank" href="http://www.lamart.ch">Official Website</a>
+            <a target="_blank" href="https://github.com/jpanneton/tubo-evic-customizer">Source</a>
+        </div>
+    </footer>
+</body>
+</html>
