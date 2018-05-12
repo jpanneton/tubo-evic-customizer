@@ -104,17 +104,17 @@ function loadResources() {
     currentWoodImage = woodColorImages[0];
 }
 
-function updateStem(index) {
-    currentStemImage = stemTypeImages[index];
-    generateResult();
-}
-
 function updateWood(index) {
     if (currentWoodImage === woodColorImages[0]) {
         currentWoodImage = woodTypeImages[index];
     }
     
     woodColorImages[0] = woodTypeImages[index];
+    generateResult();
+}
+
+function updateStem(index) {
+    currentStemImage = stemTypeImages[index];
     generateResult();
 }
 
@@ -171,8 +171,8 @@ $(document).ready(function() {
     $('#woodColorSlider').val(woodColor);
 
     // Trigger changes
-    $('#woodTypes').change();
-    $('#stemTypes').change();
+    updateWood(woodType);
+    updateStem(stemType);
     $('#vapeColorSlider').change();
     $('#woodColorSlider').change();
 });
