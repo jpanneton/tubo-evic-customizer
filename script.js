@@ -137,8 +137,9 @@ function checkRange(value, min, max) {
 }
 
 $(document).ready(function() {
-    loadResources();
     resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    loadResources();
 
     // Initialize text value from slider position
     $('#vapeColorLabel').text(vapeColors[$('#vapeColorSlider').val()]);
@@ -174,8 +175,6 @@ $(document).ready(function() {
     $('#stemTypes').change();
     $('#vapeColorSlider').change();
     $('#woodColorSlider').change();
-
-    window.addEventListener('resize', resizeCanvas);
 });
 
 function copyToClipboard(text) {
