@@ -137,7 +137,7 @@ function checkRange(value, min, max) {
 }
 
 $(document).ready(function() {
-    window.addEventListener('resize', resizeCanvas);
+    loadResources();
     resizeCanvas();
 
     // Initialize text value from slider position
@@ -163,13 +163,19 @@ $(document).ready(function() {
     var stemType = checkRange(urlParams.get('stem'), 0, 1);
     var vapeColor = checkRange(urlParams.get('vcolor'), 0, 8);
     var woodColor = checkRange(urlParams.get('wcolor'), 0, 9);
-    
+
     $('#woodTypes').children().eq(woodType).prop('checked', true);
     $('#stemTypes').children().eq(stemType).prop('checked', true);
     $('#vapeColorSlider').val(vapeColor);
     $('#woodColorSlider').val(woodColor);
 
-    loadResources();
+    // Trigger changes
+    $('#woodTypes').change();
+    $('#stemTypes').change();
+    $('#vapeColorSlider').change();
+    $('#woodColorSlider').change();
+
+    window.addEventListener('resize', resizeCanvas);
 });
 
 function copyToClipboard(text) {
