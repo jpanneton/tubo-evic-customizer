@@ -15,38 +15,38 @@
         <div>TUBO EVIC</div>
     </header>
 
-    <canvas id="result"></canvas>
+    <canvas id="canvas"></canvas>
 
     <div id="controls">
         <div class="row">
             <div class="column">
                 <span>WOOD</span>​
                 <form id="woodTypes" autocomplete="off">
-                    <input type="radio" name="1" onClick="updateWood(woodBeech);" checked> Beech
-                    <input type="radio" name="1" onClick="updateWood(woodPoplar);"> Poplar
+                    <input type="radio" name="1" onClick="updateWood(0);" checked> Beech
+                    <input type="radio" name="1" onClick="updateWood(1);"> Poplar
                 </form>
             </div>
             <div class="column">
                 <span>STEM</span>​
                 <form id="stemTypes" autocomplete="off">
-                    <input type="radio" name="1" onClick="updateStem(stemShort);" checked> Short
-                    <input type="radio" name="1" onClick="updateStem(stemLongCurved);"> Long Curved
+                    <input type="radio" name="1" onClick="updateStem(0);" checked> Short
+                    <input type="radio" name="1" onClick="updateStem(1);"> Long Curved
                 </form>
             </div>
         </div>
 
         <hr>
 
-        <div class="displayedValues">
+        <div>
             <span class="left">VAPE COLOR</span>​
             <span class="right"><label id="vapeColorLabel"/></span>​
         </div>
-        <div><input id="vapeColorSlider" type="range" min="1" max="9" step="1" value="1"></div>
-        <div class="displayedValues">
+        <div class="sliderStyle" id="vapeColorSliderStyle"><input id="vapeColorSlider" type="range" min="0" max="8" step="1" value="0"></div>
+        <div>
             <span class="left">WOOD COLOR</span>​
             <span class="right"><label id="woodColorLabel"/></span>​
         </div>
-        <div><input id="woodColorSlider" type="range" min="1" max="9" step="1" value="1"></div>
+        <div class="sliderStyle" id="woodColorSliderStyle"><input id="woodColorSlider" type="range" min="0" max="8" step="1" value="0"></div>
     </div>
 
     <footer>

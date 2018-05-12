@@ -1,65 +1,105 @@
 var vapeColors =
-{
-    "1": "Gold",
-    "2": "Cyan",
-    "3": "Grey",
-    "4": "White",
-    "5": "Black",
-    "6": "Red",
-    "7": "Orange",
-    "8": "Blue",
-    "9": "Burgundy"
-};
+[
+    "Gold",
+    "Cyan",
+    "Grey",
+    "White",
+    "Black",
+    "Red",
+    "Orange",
+    "Blue",
+    "Burgundy"
+];
 
 var woodColors =
-{
-    "1": "None",
-    "2": "Sun Yellow",
-    "3": "Azo Orange",
-    "4": "Permanent Cyan",
-    "5": "Permanent Violet Blue",
-    "6": "Permanent Green",
-    "7": "Marine Blue",
-    "8": "Sap Green",
-    "9": "Oxide Black"
-};
+[
+    "None",
+    "Sun Yellow",
+    "Azo Orange",
+    "Permanent Cyan",
+    "Permanent Violet Blue",
+    "Permanent Green",
+    "Marine Blue",
+    "Sap Green",
+    "Oxide Black"
+];
 
-var maxImageResolution = 2048;
+var maxImageResolution = 1048;
 var vapeColorImages = new Array();
 var woodColorImages = new Array();
 
+var totalImageCount = 21;
+var loadedImageCount = 0;
+var readyToDraw = false;
+
+function generateResult() {
+    if (readyToDraw) {
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(currentVapeImage, 0, 0, canvas.width, canvas.height);
+        context.drawImage(currentWoodImage, 0, 0, canvas.width, canvas.height);
+        context.drawImage(currentStemImage, 0, 0, canvas.width, canvas.height);
+    }
+}
+
+function fillImageArray(imageArray) {
+    for (var i = 0; i < imageArray.length; i++) {
+        imageArray[i] = new Image();
+    }
+}
+
+function initImage(image, path) {
+    image.onload = function() {
+        loadedImageCount++;
+        if(loadedImageCount == totalImageCount) {
+            readyToDraw = true;
+            generateResult();
+        }
+    };
+    image.src = path;
+}
+
 function loadResources() {
-    vapeColorImages[1] = new Image(); vapeColorImages[1].src = 'Images/Vape/Gold.png';
-    vapeColorImages[2] = new Image(); vapeColorImages[2].src = 'Images/Vape/Cyan.png';
-    vapeColorImages[3] = new Image(); vapeColorImages[3].src = 'Images/Vape/Grey.png';
-    vapeColorImages[4] = new Image(); vapeColorImages[4].src = 'Images/Vape/White.png';
-    vapeColorImages[5] = new Image(); vapeColorImages[5].src = 'Images/Vape/Black.png';
-    vapeColorImages[6] = new Image(); vapeColorImages[6].src = 'Images/Vape/Red.png';
-    vapeColorImages[7] = new Image(); vapeColorImages[7].src = 'Images/Vape/Orange.png';
-    vapeColorImages[8] = new Image(); vapeColorImages[8].src = 'Images/Vape/Blue.png';
-    vapeColorImages[9] = new Image(); vapeColorImages[9].src = 'Images/Vape/Burgundy.png';
+    woodTypeImages = new Array(2);
+    stemTypeImages = new Array(2);
+    vapeColorImages = new Array(9);
+    woodColorImages = new Array(9);
 
-    woodBeech = new Image(); woodBeech.src = 'Images/Beech.png';
-    woodPoplar = new Image(); woodPoplar.src = 'Images/Poplar.png';
+    fillImageArray(woodTypeImages);
+    fillImageArray(stemTypeImages);
+    fillImageArray(vapeColorImages);
+    fillImageArray(woodColorImages);
 
-    woodColorImages[1] = woodBeech;
-    woodColorImages[2] = new Image(); woodColorImages[2].src = 'Images/Wood/SunYellow.png';
-    woodColorImages[3] = new Image(); woodColorImages[3].src = 'Images/Wood/AzoOrange.png';
-    woodColorImages[4] = new Image(); woodColorImages[4].src = 'Images/Wood/PermanentCyan.png';
-    woodColorImages[5] = new Image(); woodColorImages[5].src = 'Images/Wood/PermanentVioletBlue.png';
-    woodColorImages[6] = new Image(); woodColorImages[6].src = 'Images/Wood/PermanentGreen.png';
-    woodColorImages[7] = new Image(); woodColorImages[7].src = 'Images/Wood/MarineBlue.png';
-    woodColorImages[8] = new Image(); woodColorImages[8].src = 'Images/Wood/SapGreen.png';
-    woodColorImages[9] = new Image(); woodColorImages[9].src = 'Images/Wood/OxideBlack.png';
+    initImage(woodTypeImages[0], 'Images/Beech.png');
+    initImage(woodTypeImages[1], 'Images/Poplar.png');
 
-    stemShort = new Image(); stemShort.src = 'Images/Stem/Short.png';
-    stemLongCurved = new Image(); stemLongCurved.src = 'Images/Stem/LongCurved.png';
-    buttons = new Image(); buttons.src = 'Images/Buttons.png';
-    interior = new Image(); interior.src = 'Images/Interior.png';
+    initImage(stemTypeImages[0], 'Images/Stem/Short.png');
+    initImage(stemTypeImages[1], 'Images/Stem/LongCurved.png');
 
-    currentStemImage = stemShort;
-    currentVapeImage = vapeColorImages[1];
-    currentWoodImage = woodColorImages[1];
+    initImage(vapeColorImages[0], 'Images/Vape/Gold.png');
+    initImage(vapeColorImages[1], 'Images/Vape/Cyan.png');
+    initImage(vapeColorImages[2], 'Images/Vape/Grey.png');
+    initImage(vapeColorImages[3], 'Images/Vape/White.png');
+    initImage(vapeColorImages[4], 'Images/Vape/Black.png');
+    initImage(vapeColorImages[5], 'Images/Vape/Red.png');
+    initImage(vapeColorImages[6], 'Images/Vape/Orange.png');
+    initImage(vapeColorImages[7], 'Images/Vape/Blue.png');
+    initImage(vapeColorImages[8], 'Images/Vape/Burgundy.png');
+
+    woodColorImages[0] = woodTypeImages[0];
+    initImage(woodColorImages[1], 'Images/Wood/SunYellow.png');
+    initImage(woodColorImages[2], 'Images/Wood/AzoOrange.png');
+    initImage(woodColorImages[3], 'Images/Wood/PermanentCyan.png');
+    initImage(woodColorImages[4], 'Images/Wood/PermanentVioletBlue.png');
+    initImage(woodColorImages[5], 'Images/Wood/PermanentGreen.png');
+    initImage(woodColorImages[6], 'Images/Wood/MarineBlue.png');
+    initImage(woodColorImages[7], 'Images/Wood/SapGreen.png');
+    initImage(woodColorImages[8], 'Images/Wood/OxideBlack.png');
+
+    currentStemImage = stemTypeImages[0];
+    currentVapeImage = vapeColorImages[0];
+    currentWoodImage = woodColorImages[0];
 }
 
 function copyToClipboard(text) {
@@ -73,52 +113,36 @@ function copyToClipboard(text) {
  }
 
 function generateURL() {
-    var woodTypeIndex = (woodColorImages[1] == woodBeech) ? 1 : 2;
-    var stemTypeIndex = (currentStemImage == stemShort) ? 1 : 2;
+    var woodTypeIndex = woodTypeImages.indexOf(woodColorImages[0]);
+    var stemTypeIndex = stemTypeImages.indexOf(currentStemImage);
     var vapeColorIndex = vapeColorImages.indexOf(currentVapeImage);
     var woodColorIndex = woodColorImages.indexOf(currentWoodImage);
-    var baseURL = "file:///E:/Documents/Websites/Tubo%20Evic/index.html";
+    var baseURL = "tubo-evic-customizer.netlify.com/";
     var parameters = "?wood=" + woodTypeIndex + "&stem=" + stemTypeIndex + "&vcolor=" + vapeColorIndex + "&wcolor=" + woodColorIndex;
     copyToClipboard(baseURL + parameters);
 }
 
-function generateResult() {
-    var canvas = document.getElementById('result');
-    var context = canvas.getContext('2d');
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(interior, 0, 0, canvas.width, canvas.height);
-    context.drawImage(currentWoodImage, 0, 0, canvas.width, canvas.height);
-    context.drawImage(currentVapeImage, 0, 0, canvas.width, canvas.height);
-    context.drawImage(currentStemImage, 0, 0, canvas.width, canvas.height);
-    context.drawImage(buttons, 0, 0, canvas.width, canvas.height);
-}
-
-function updateStem(stemType) {
-    currentStemImage = eval(stemType);
+function updateStem(index) {
+    currentStemImage = stemTypeImages[index];
     generateResult();
 }
 
-function updateWood(woodType) {
-    if (currentWoodImage === woodColorImages[1]) {
-        woodColorImages[1] = eval(woodType);
-        currentWoodImage = woodColorImages[1];
-    } else {
-        woodColorImages[1] = eval(woodType);
-    }
-
+function updateWood(index) {
+    currentWoodImage = woodTypeImages[index];
+    woodColorImages[0] = currentWoodImage;
     generateResult();
 }
 
 function resizeCanvas() {
-    var canvas = document.getElementById('result');
+    var canvas = document.getElementById('canvas');
     canvas.width  = Math.min(window.innerHeight / 2, maxImageResolution);
     canvas.height = Math.min(window.innerHeight / 2, maxImageResolution);
     generateResult();
 }
 
 function init(woodType, stemType, vapeColor, woodColor) {
-    $('#woodTypes').children().eq(woodType - 1).prop("checked", true);
-    $('#stemTypes').children().eq(stemType - 1).prop("checked", true);
+    $('#woodTypes').children().eq(woodType).prop("checked", true);
+    $('#stemTypes').children().eq(stemType).prop("checked", true);
     $('#vapeColorSlider').val(vapeColor);
     $('#woodColorSlider').val(woodColor);
 
@@ -133,22 +157,20 @@ function isInt(value) {
 }
 
 $(document).ready(function() {
-    var canvas = document.getElementById('result');
-    canvas.width  = Math.min(window.innerHeight / 2, maxImageResolution);
-    canvas.height = Math.min(window.innerHeight / 2, maxImageResolution);
-
+    resizeCanvas();
     loadResources();
 
-    // on page load, set the text of the label based the value of the range
+    // Initialize text value from slider position
     $('#vapeColorLabel').text(vapeColors[$('#vapeColorSlider').val()]);
     $('#woodColorLabel').text(woodColors[$('#woodColorSlider').val()]);
 
-    // setup an event handler to set the text when the range value is dragged (see event for input) or changed (see event for change)
+    // Event handler to set text value when the slider is dragged
     $('#vapeColorSlider').on('input change', function () {
         $('#vapeColorLabel').text(vapeColors[$(this).val()]);
         currentVapeImage = vapeColorImages[$(this).val()];
         generateResult();
     });
+
     $('#woodColorSlider').on('input change', function () {
         $('#woodColorLabel').text(woodColors[$(this).val()]);
         currentWoodImage = woodColorImages[$(this).val()];
@@ -160,23 +182,23 @@ $(document).ready(function() {
 
 function checkRange(value, min, max) {
     if (!isInt(value) || value < min || value > max) {
-        value = 1;
+        value = 0;
     }
     return value;
 }
 
 $(window).on("load", function() {
     var urlParams = new URLSearchParams(window.location.search);
-    var woodType = checkRange(urlParams.get('wood'), 1, 2);
-    var stemType = checkRange(urlParams.get('stem'), 1, 2);
-    var vapeColor = checkRange(urlParams.get('vcolor'), 1, 9);
-    var woodColor = checkRange(urlParams.get('wcolor'), 1, 9);
-
+    var woodType = checkRange(urlParams.get('wood'), 0, 1);
+    var stemType = checkRange(urlParams.get('stem'), 0, 1);
+    var vapeColor = checkRange(urlParams.get('vcolor'), 0, 8);
+    var woodColor = checkRange(urlParams.get('wcolor'), 0, 8);
     init(woodType, stemType, vapeColor, woodColor);
 });
 
 function downloadResult() {
-    var canvas = document.getElementById('result');
+    var canvas = document.getElementById('canvas');
     var img = canvas.toDataURL('image/png');
-    document.write('<img src="' + img + '"/>');
+    var tab = window.open('about:blank');
+    tab.document.write('<img src="' + img + '"/>');
 }
