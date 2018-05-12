@@ -16,8 +16,8 @@ var woodColors =
     "None",
     "Sun Yellow",
     "Azo Orange",
-    "Permanent Cyan",
-    "Permanent Violet Blue",
+    "Primary Cyan",
+    "Permanent Blue Violet",
     "Permanent Green",
     "Marine Blue",
     "Sap Green",
@@ -52,7 +52,7 @@ function fillImageArray(imageArray) {
 function initImage(image, path) {
     image.onload = function() {
         loadedImageCount++;
-        if(loadedImageCount == totalImageCount) {
+        if (loadedImageCount == totalImageCount) {
             readyToDraw = true;
             generateResult();
         }
@@ -90,8 +90,8 @@ function loadResources() {
     woodColorImages[0] = woodTypeImages[0];
     initImage(woodColorImages[1], 'Images/Wood/SunYellow.png');
     initImage(woodColorImages[2], 'Images/Wood/AzoOrange.png');
-    initImage(woodColorImages[3], 'Images/Wood/PermanentCyan.png');
-    initImage(woodColorImages[4], 'Images/Wood/PermanentVioletBlue.png');
+    initImage(woodColorImages[3], 'Images/Wood/PrimaryCyan.png');
+    initImage(woodColorImages[4], 'Images/Wood/PermanentBlueViolet.png');
     initImage(woodColorImages[5], 'Images/Wood/PermanentGreen.png');
     initImage(woodColorImages[6], 'Images/Wood/MarineBlue.png');
     initImage(woodColorImages[7], 'Images/Wood/SapGreen.png');
@@ -101,6 +101,74 @@ function loadResources() {
     currentVapeImage = vapeColorImages[0];
     currentWoodImage = woodColorImages[0];
 }
+
+function updateStem(index) {
+    currentStemImage = stemTypeImages[index];
+    generateResult();
+}
+
+function updateWood(index) {
+    if (currentWoodImage === woodColorImages[0]) {
+        currentWoodImage = woodTypeImages[index];
+    }
+    
+    woodColorImages[0] = woodTypeImages[index];
+    generateResult();
+}
+
+function resizeCanvas() {
+    var canvas = document.getElementById('canvas');
+    canvas.width  = Math.min(window.innerHeight / 2, maxImageResolution);
+    canvas.height = Math.min(window.innerHeight / 2, maxImageResolution);
+    generateResult();
+}
+
+function isInt(value) {
+    return !isNaN(value) && parseInt(Number(value)) == value && !isNaN(parseInt(value, 10));
+}
+
+function checkRange(value, min, max) {
+    if (!isInt(value) || value < min || value > max) {
+        value = 0;
+    }
+    return value;
+}
+
+$(document).ready(function() {
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Initialize text value from slider position
+    $('#vapeColorLabel').text(vapeColors[$('#vapeColorSlider').val()]);
+    $('#woodColorLabel').text(woodColors[$('#woodColorSlider').val()]);
+
+    // Add event handler to set text value when the sliders are dragged
+    $('#vapeColorSlider').on('input change', function () {
+        $('#vapeColorLabel').text(vapeColors[$(this).val()]);
+        currentVapeImage = vapeColorImages[$(this).val()];
+        generateResult();
+    });
+
+    $('#woodColorSlider').on('input change', function () {
+        $('#woodColorLabel').text(woodColors[$(this).val()]);
+        currentWoodImage = woodColorImages[$(this).val()];
+        generateResult();
+    });
+
+    // Set value of controls from URL parameters (if any)
+    var urlParams = new URLSearchParams(window.location.search);
+    var woodType = checkRange(urlParams.get('wood'), 0, 1);
+    var stemType = checkRange(urlParams.get('stem'), 0, 1);
+    var vapeColor = checkRange(urlParams.get('vcolor'), 0, 8);
+    var woodColor = checkRange(urlParams.get('wcolor'), 0, 8);
+    
+    $('#woodTypes').children().eq(woodType).prop('checked', true);
+    $('#stemTypes').children().eq(stemType).prop('checked', true);
+    $('#vapeColorSlider').val(vapeColor);
+    $('#woodColorSlider').val(woodColor);
+
+    loadResources();
+});
 
 function copyToClipboard(text) {
     var input = document.createElement('input');
@@ -121,80 +189,6 @@ function generateURL() {
     var parameters = "?wood=" + woodTypeIndex + "&stem=" + stemTypeIndex + "&vcolor=" + vapeColorIndex + "&wcolor=" + woodColorIndex;
     copyToClipboard(baseURL + parameters);
 }
-
-function updateStem(index) {
-    currentStemImage = stemTypeImages[index];
-    generateResult();
-}
-
-function updateWood(index) {
-    currentWoodImage = woodTypeImages[index];
-    woodColorImages[0] = currentWoodImage;
-    generateResult();
-}
-
-function resizeCanvas() {
-    var canvas = document.getElementById('canvas');
-    canvas.width  = Math.min(window.innerHeight / 2, maxImageResolution);
-    canvas.height = Math.min(window.innerHeight / 2, maxImageResolution);
-    generateResult();
-}
-
-function init(woodType, stemType, vapeColor, woodColor) {
-    $('#woodTypes').children().eq(woodType).prop("checked", true);
-    $('#stemTypes').children().eq(stemType).prop("checked", true);
-    $('#vapeColorSlider').val(vapeColor);
-    $('#woodColorSlider').val(woodColor);
-
-    $('#woodTypes').trigger('change');
-    $('#stemTypes').trigger('change');
-    $("#vapeColorSlider").trigger('change');
-    $("#woodColorSlider").trigger('change');
-}
-
-function isInt(value) {
-    return !isNaN(value) && parseInt(Number(value)) == value && !isNaN(parseInt(value, 10));
-}
-
-$(document).ready(function() {
-    resizeCanvas();
-    loadResources();
-
-    // Initialize text value from slider position
-    $('#vapeColorLabel').text(vapeColors[$('#vapeColorSlider').val()]);
-    $('#woodColorLabel').text(woodColors[$('#woodColorSlider').val()]);
-
-    // Event handler to set text value when the slider is dragged
-    $('#vapeColorSlider').on('input change', function () {
-        $('#vapeColorLabel').text(vapeColors[$(this).val()]);
-        currentVapeImage = vapeColorImages[$(this).val()];
-        generateResult();
-    });
-
-    $('#woodColorSlider').on('input change', function () {
-        $('#woodColorLabel').text(woodColors[$(this).val()]);
-        currentWoodImage = woodColorImages[$(this).val()];
-        generateResult();
-    });
-
-    window.addEventListener('resize', resizeCanvas);
-});
-
-function checkRange(value, min, max) {
-    if (!isInt(value) || value < min || value > max) {
-        value = 0;
-    }
-    return value;
-}
-
-$(window).on("load", function() {
-    var urlParams = new URLSearchParams(window.location.search);
-    var woodType = checkRange(urlParams.get('wood'), 0, 1);
-    var stemType = checkRange(urlParams.get('stem'), 0, 1);
-    var vapeColor = checkRange(urlParams.get('vcolor'), 0, 8);
-    var woodColor = checkRange(urlParams.get('wcolor'), 0, 8);
-    init(woodType, stemType, vapeColor, woodColor);
-});
 
 function downloadResult() {
     var canvas = document.getElementById('canvas');

@@ -2,16 +2,14 @@
 *---------------- GLOBAL STYLES ----------------*
 ************************************************/
 
-html, body {
+html {
     font-family: 'Cambria';
     font-size: 2vh;
     text-align: center;
-    width: 100%;
-    margin: 0;
-    color: #E1E1E1;
 }
 
 body {
+    color: #E1E1E1;
     background: repeating-linear-gradient(
         45deg,
         #1E1E1E,
@@ -48,16 +46,12 @@ header p:first-child:before, header p:first-child:after {
 header div {
     font-size: 10vh;
     text-shadow: 2px 2px #B7BD9B;
+    color: #F5F5F5;
 }
 
 footer div {
     font-family: 'Open Sans Light';
     font-size: 1.5vh;
-}
-
-footer p {
-    display: inline-block;
-    opacity: 0.5;
 }
 
 footer button {
@@ -70,6 +64,11 @@ footer button {
     margin-top: 2vh;
     margin-bottom: 1vh;
     cursor: pointer;
+}
+
+footer p {
+    display: inline-block;
+    opacity: 0.5;
 }
 
 footer a {
@@ -139,7 +138,7 @@ input[type=radio] {
 }
 
 #woodColorSliderStyle {
-    /* In order: none, sun yellow, azo orange, permanent cyan, permanent violet blue, permanent green, marine blue, sap green, oxide black */
+    /* In order: none, sun yellow, azo orange, primary cyan, permanent blue violet, permanent green, marine blue, sap green, oxide black */
     background: linear-gradient(to right,
         #FFFFFF 00%, #FFFFFF 11%,
         #F6C93A 11%, #F6C93A 22%,
