@@ -17,6 +17,7 @@ var woodColors =
     "Sun Yellow",
     "Azo Orange",
     "Primary Cyan",
+    "Permanent Red Violet",
     "Permanent Blue Violet",
     "Permanent Green",
     "Marine Blue",
@@ -28,7 +29,7 @@ var maxImageResolution = 1048;
 var vapeColorImages = new Array();
 var woodColorImages = new Array();
 
-var totalImageCount = 21;
+var totalImageCount = 22;
 var loadedImageCount = 0;
 var readyToDraw = false;
 
@@ -64,7 +65,7 @@ function loadResources() {
     woodTypeImages = new Array(2);
     stemTypeImages = new Array(2);
     vapeColorImages = new Array(9);
-    woodColorImages = new Array(9);
+    woodColorImages = new Array(10);
 
     fillImageArray(woodTypeImages);
     fillImageArray(stemTypeImages);
@@ -91,11 +92,12 @@ function loadResources() {
     initImage(woodColorImages[1], 'Images/Wood/SunYellow.png');
     initImage(woodColorImages[2], 'Images/Wood/AzoOrange.png');
     initImage(woodColorImages[3], 'Images/Wood/PrimaryCyan.png');
-    initImage(woodColorImages[4], 'Images/Wood/PermanentBlueViolet.png');
-    initImage(woodColorImages[5], 'Images/Wood/PermanentGreen.png');
-    initImage(woodColorImages[6], 'Images/Wood/MarineBlue.png');
-    initImage(woodColorImages[7], 'Images/Wood/SapGreen.png');
-    initImage(woodColorImages[8], 'Images/Wood/OxideBlack.png');
+    initImage(woodColorImages[4], 'Images/Wood/PermanentRedViolet.png');
+    initImage(woodColorImages[5], 'Images/Wood/PermanentBlueViolet.png');
+    initImage(woodColorImages[6], 'Images/Wood/PermanentGreen.png');
+    initImage(woodColorImages[7], 'Images/Wood/MarineBlue.png');
+    initImage(woodColorImages[8], 'Images/Wood/SapGreen.png');
+    initImage(woodColorImages[9], 'Images/Wood/OxideBlack.png');
 
     currentStemImage = stemTypeImages[0];
     currentVapeImage = vapeColorImages[0];
@@ -160,7 +162,7 @@ $(document).ready(function() {
     var woodType = checkRange(urlParams.get('wood'), 0, 1);
     var stemType = checkRange(urlParams.get('stem'), 0, 1);
     var vapeColor = checkRange(urlParams.get('vcolor'), 0, 8);
-    var woodColor = checkRange(urlParams.get('wcolor'), 0, 8);
+    var woodColor = checkRange(urlParams.get('wcolor'), 0, 9);
     
     $('#woodTypes').children().eq(woodType).prop('checked', true);
     $('#stemTypes').children().eq(stemType).prop('checked', true);

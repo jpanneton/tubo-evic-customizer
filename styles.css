@@ -138,17 +138,18 @@ input[type=radio] {
 }
 
 #woodColorSliderStyle {
-    /* In order: none, sun yellow, azo orange, primary cyan, permanent blue violet, permanent green, marine blue, sap green, oxide black */
+    /* In order: none, sun yellow, azo orange, permanent cyan, permanent red violet, permanent blue violet, permanent green, marine blue, sap green, oxide black */
     background: linear-gradient(to right,
-        #FFFFFF 00%, #FFFFFF 11%,
-        #F6C93A 11%, #F6C93A 22%,
-        #F68A2E 22%, #F68A2E 33%,
-        #33B4E0 33%, #33B4E0 44%,
-        #60426E 44%, #60426E 55%,
-        #269B6C 55%, #269B6C 66%,
-        #376979 66%, #376979 77%,
-        #3C573E 77%, #3C573E 88%,
-        #353535 88%, #353535 99%);
+        #FFFFFF  0%, #FFFFFF 10%,
+        #F6C93A 10%, #F6C93A 20%,
+        #F68A2E 20%, #F68A2E 30%,
+        #33B4E0 30%, #33B4E0 40%,
+        #C13F63 40%, #C13F63 50%,
+        #60426E 50%, #60426E 60%,
+        #269B6C 60%, #269B6C 70%,
+        #376979 70%, #376979 80%,
+        #3C573E 80%, #3C573E 90%,
+        #353535 90%, #353535 100%);
 }
 
 input[type=range] {
