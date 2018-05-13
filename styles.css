@@ -126,30 +126,30 @@ input[type=radio] {
 #vapeColorSliderStyle {
     /* In order: gold, cyan, grey, white, black, red, orange, blue, burgundy */
     background: linear-gradient(to right,
-        #FBE5D2 00%, #FBE5D2 11%,
-        #55FEF2 11%, #55FEF2 22%,
-        #7D7D7D 22%, #7D7D7D 33%,
-        #FEFEFE 33%, #FEFEFE 44%,
-        #212322 44%, #212322 55%,
-        #FD564E 55%, #FD564E 66%,
-        #FCA53D 66%, #FCA53D 77%,
-        #0E5DEF 77%, #0E5DEF 88%,
-        #BA3237 88%, #BA3237 99%);
+        #E2C5BC 00%, #E2C5BC 11%,
+        #4DF1DF 11%, #4DF1DF 22%,
+        #4D4D4D 22%, #4D4D4D 33%,
+        #EEEEEE 33%, #EEEEEE 44%,
+        #181818 44%, #181818 55%,
+        #FD0008 55%, #FD0008 66%,
+        #FE7904 66%, #FE7904 77%,
+        #0D5CED 77%, #0D5CED 88%,
+        #6C0004 88%, #6C0004 99%);
 }
 
 #woodColorSliderStyle {
     /* In order: none, sun yellow, azo orange, permanent cyan, permanent red violet, permanent blue violet, permanent green, marine blue, sap green, oxide black */
     background: linear-gradient(to right,
         #FFFFFF  0%, #FFFFFF 10%,
-        #F6C93A 10%, #F6C93A 20%,
-        #F68A2E 20%, #F68A2E 30%,
-        #33B4E0 30%, #33B4E0 40%,
-        #C13F63 40%, #C13F63 50%,
-        #60426E 50%, #60426E 60%,
-        #269B6C 60%, #269B6C 70%,
-        #376979 70%, #376979 80%,
-        #3C573E 80%, #3C573E 90%,
-        #353535 90%, #353535 100%);
+        #F4D13A 10%, #F4D13A 20%,
+        #F6872F 20%, #F6872F 30%,
+        #29B3DC 30%, #29B3DC 40%,
+        #C24365 40%, #C24365 50%,
+        #563C66 50%, #563C66 60%,
+        #219969 60%, #219969 70%,
+        #335B69 70%, #335B69 80%,
+        #3D5A41 80%, #3D5A41 90%,
+        #373737 90%, #373737 100%);
 }
 
 input[type=range] {
